@@ -1,0 +1,19 @@
+import teamMembers from '../lib/mock/team';
+
+export default function TeamGrid() {
+  return (
+    <div className="team-grid">
+      {teamMembers.map((member) => (
+        <div key={member.id} className="team-member">
+          <div className="member-image">
+            {/* Placeholder image until actual headshots are available */}
+            <div className="placeholder-image" style={{ backgroundColor: '#f0f0f0', height: '200px' }}></div>
+          </div>
+          <h3>{member.name}</h3>
+          <p className="member-role">{member.role}</p>
+          <p className="member-bio">{member.bioShort}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
