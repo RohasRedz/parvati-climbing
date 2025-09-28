@@ -1,0 +1,189 @@
+---
+description: Parvati Climbing NGO project instructions and development guidelines
+globs: []
+alwaysApply: true
+---
+
+# Cursor Instructions — Parvati Climbing NGO (Next.js repo: `parvati-next`)
+
+These instructions guide Cursor to continue development for the **Parvati Climbing NGO** website using the existing Next.js scaffold. Keep everything **CMS‑ready**, narrative‑driven, and aligned with the client's initial vision. primary KPI = awareness + storytelling impact
+
+---
+
+## 0) Project Context (from client meeting)
+- **Hero**: Intro to **Mission + Vision**; highlight impact *through climbing*.
+- **About**: Keep simple for v1 (history + people). **Theory of Change** section will be added later.
+- **Partners/Collaborators**: Show key collaborators/partners.
+- **Primary goal (v1)**: **General awareness** (not lead gen, not bookings yet).
+- **Media**: Embed **Instagram posts** (in Contact/Media area).
+- **Donate**: Button links **externally to GoFundMe** (no internal checkout for v1).
+- **Theme**: Climbing‑centric visuals + **custom loader** tied to mountain climbing; tasteful **GSAP/Anime.js** narrative animations.
+- **Sitemap (v1)**: **Home**, **About** (history + people), **Projects**, **Partners**, **Donate** (GoFundMe), **Contact Us** (includes Instagram).
+- **CMS‑ready**: Code for future headless CMS (Strapi/Directus/Sanity), editable content schemas, no hardcoding copy.
+- **Hosting**: Keep deployable (e.g., Vercel/HF Space/GitHub Pages).
+
+> Non‑goals (for v1): program bookings, lead capture, forms beyond basic contact, complex e‑commerce.
+
+---
+
+## 1) Tech & Conventions
+- **Framework**: Next.js (App Router not required; Pages Router OK as scaffolded).
+- **Styling**: Global CSS (already present). Keep components self‑contained; prefer CSS modules later if needed.
+- **Animation**: **GSAP** (+ ScrollTrigger) for scroll orchestration; **Anime.js** for micro‑interactions.
+- **Images**: Use `/public/assets` with responsive attributes; later switch to `next/image` as needed.
+- **CMS‑ready**: Abstract content into `lib/mock/*.ts` (mock data) with interfaces matching planned schemas; in v2 swap to API calls.
+- **Accessibility**: Honor `prefers-reduced-motion`; alt text required; keyboard focus states.
+- **Performance**: Only animate opacity/transform; lazy‑load below‑the‑fold media.
+
+---
+
+## 2) Tasks — V1 Milestone (Awareness‑first)
+> Target branch: `v1/awareness-draft`
+
+### 2.1 Pages (routes)
+- `/` **Home**: narrative hero, program highlights, project teaser, partner strip, donate CTA.
+- `/about` **About**: short history + team (people grid). Placeholder slot for "Theory of Change" (hidden until content exists).
+- `/projects` **Projects**: list of projects (cards) with location tag (Jamaica/Parvati/etc.), short description, gallery placeholder.
+- `/partners` **Partners**: grid of collaborator logos with links; short descriptions.
+- `/donate` **Donate**: brief rationale + **GoFundMe external link** (primary CTA).
+- `/contact` **Contact**: email, location, and **Instagram embed** (posts/carousel).
+
+### 2.2 Navigation & Footer
+- Update primary nav to: Home, About, Projects, Partners, Donate, Contact.
+- Footer with address/email, Instagram link, and small print.
+
+### 2.3 Narrative & Motion
+- **Hero rope path** draws on mount; CTA "clip" micro‑motion (carabiner).
+- **Scroll reveals** for sections (staggered cards, soft parallax).
+- **Reduced motion** guard: fallback to non‑animated static reveals.
+- **Custom loader**: a minimalist climber/carabiner loop Lottie or CSS/GIF (swap in later with asset).
+
+### 2.4 Content & Mock Data
+Create `lib/mock/` with:
+- `site.ts` — site meta, nav, footer, social (instagram handle/url).  
+- `team.ts` — `{ name, role, headshot, bioShort }[]`  
+- `projects.ts` — `{ title, region, excerpt, images[], status }[]`  
+- `partners.ts` — `{ name, logo, url, blurb }[]`  
+
+> Wire pages to read from `lib/mock/*` so copy is not hardcoded. Use placeholders now; later replace with CMS API.
+
+### 2.5 Components (minimum set)
+- `components/Nav.tsx`
+- `components/Hero.tsx` *(rope path + CTA)*
+- `components/StripPartners.tsx` *(logo strip with subtle motion)*
+- `components/ProjectCards.tsx` *(grid + reveal)*
+- `components/TeamGrid.tsx`
+- `components/InstagramEmbed.tsx` *(simple iframe/embed)*
+
+Keep component APIs **data‑driven** (accept props typed by mock interfaces).
+
+### 2.6 Donate Flow (external)
+- `/donate` page: one primary button → **GoFundMe link** (target=`_blank`, `rel="noopener noreferrer"`).
+
+### 2.7 Accessibility & SEO
+- Page titles/meta for each route.
+- Landmark tags (`<header>`, `<main>`, `<footer>`).
+- Alt text required for images (lint if possible).
+- Google Analytics/Meta Pixel integration for awareness tracking
+
+---
+
+## 3) Tasks — V1.1 (Polish & CMS‑readiness)
+- Replace inline text with constants from `lib/mock/site.ts` (mission, vision snippets).
+- Extract animation timelines into `hooks/useMotion.ts` (reusable GSAP helpers).
+- Add **feature flags** (env‑based) to toggle heavy animations.
+- Prepare **interfaces** in `types/*.d.ts` matching CMS schemas (About, Team, Partner, Project).
+- Add **content placeholders** for "Theory of Change" (section stub hidden by default).
+
+---
+
+## 4) Implementation Hints (Cursor)
+- **GSAP SSR**: import ScrollTrigger dynamically inside `useEffect` (`typeof window !== 'undefined'`). Register plugin per component.
+- **Reduced Motion**:
+  ```ts
+  const prefersReduced = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return; // skip heavy timelines
+  ```
+- **Instagram Embed**: simplest is embed code via iframe/script. Encapsulate in `InstagramEmbed` with a placeholder if scripts are blocked.
+- **Loader**: create `components/Loader.tsx`; mount globally in `_app` and auto‑hide after first paint (or once hero images ready).
+
+---
+
+## 5) Definition of Done (V1)
+- All 6 routes present and linked in nav.
+- Hero has working rope/CTA motion; sections reveal on scroll.
+- Donate page opens **GoFundMe** externally.
+- Contact page renders an **Instagram embed** (or graceful placeholder).
+- Content is fed from `lib/mock/*` (no hardcoded long copy).
+- Build runs locally with `npm run dev`; deployable to Vercel.
+- Passes basic a11y checks (alt text, focus, reduced motion).
+
+---
+
+## 6) Development Guidelines & Restrictions
+
+### Code Quality Standards
+- Write clean, self-documenting code with meaningful variable and function names
+- Add comments for complex logic or business rules
+- Follow React hooks rules and best practices
+- Implement proper error handling and loading states
+- Ensure responsive design across all screen sizes
+- Honor `prefers-reduced-motion` for accessibility
+
+### Code Restrictions
+- **NO** direct DOM manipulation - use React state and props
+- **NO** inline styles unless absolutely necessary - prefer CSS classes
+- **NO** hardcoded content values - use `lib/mock/*` data files
+- **NO** console.log statements in production code
+- **NO** unused imports or variables
+- **NO** overly complex components - break them down into smaller ones
+
+### File and Directory Structure
+- Follow Next.js file-based routing conventions (Pages Router)
+- Keep components modular in `/components` directory
+- Store mock data in `/lib/mock/` directory
+- Store types/interfaces in `/types/` directory
+- Place static assets in `/public/assets`
+- Use consistent naming conventions (PascalCase for components, camelCase for functions/variables)
+
+### Animation Guidelines
+- Use GSAP for scroll orchestration and complex animations
+- Use Anime.js for micro-interactions and simple animations
+- Only animate opacity/transform properties for performance
+- Always provide fallbacks for `prefers-reduced-motion`
+- Lazy-load below-the-fold animations
+
+### CMS-Ready Development
+- Abstract all content into mock data files
+- Create typed interfaces for all content schemas
+- Wire components to accept data via props
+- Prepare for future API integration
+- Avoid hardcoded copy in components
+
+---
+
+## 7) Open Questions for Client (keep in README)
+- Confirm **mission/vision copy** for hero.
+- Provide **partner logos** and brand usage rules.
+- Approve **initial projects list** and featured images.
+- Confirm **Instagram handle** and which posts to feature.
+- Provide **GoFundMe URL** for the Donate button.
+- Any **brand colors/typography** guidelines?
+- Any languages beyond English (for later i18n)?
+
+---
+
+## 8) Next Steps (after V1 sign‑off)
+- Swap mock data for a headless CMS (Strapi/Directus/Sanity).
+- Add Stories/Media page if the client prioritises content storytelling.
+- Consider basic analytics (GA4) and sitemap/robots.
+- Expand animation system with route‑aware timelines.
+
+---
+
+## Commands (local dev)
+```bash
+npm install
+npm run dev
+# open http://localhost:3000
+```
