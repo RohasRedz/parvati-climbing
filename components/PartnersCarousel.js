@@ -11,6 +11,11 @@ export default function PartnersCarousel({ className = '' }) {
         autoPlayInterval={3000}
         showDots={false}
         className="partners-carousel-inner"
+        responsive={{
+          mobile: { slidesToShow: 2, gap: 16 },
+          tablet: { slidesToShow: 3, gap: 20 },
+          desktop: { slidesToShow: 4, gap: 24 }
+        }}
       >
         {partners.map((partner) => (
           <div key={partner.id} className="partner-card">

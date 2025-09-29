@@ -8,19 +8,58 @@ export default function Carousel({
   showDots = true,
   showArrows = true,
   slidesToShow = 1,
-  gap = 20
+  gap = 20,
+  responsive = {}
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [currentSlidesToShow, setCurrentSlidesToShow] = useState(slidesToShow);
+  const [currentGap, setCurrentGap] = useState(gap);
   const carouselRef = useRef(null);
   const autoPlayRef = useRef(null);
 
   const totalSlides = children.length;
-  const maxIndex = Math.max(0, totalSlides - slidesToShow);
+  const maxIndex = Math.max(0, totalSlides - currentSlidesToShow);
+
+  // Handle responsive breakpoints
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      let newSlidesToShow = slidesToShow;
+      let newGap = gap;
+
+      // Check breakpoints in order from smallest to largest
+      if (responsive.mobile && width <= 480) {
+        newSlidesToShow = responsive.mobile.slidesToShow || slidesToShow;
+        newGap = responsive.mobile.gap || gap;
+      } else if (responsive.tablet && width > 480 && width <= 768) {
+        newSlidesToShow = responsive.tablet.slidesToShow || slidesToShow;
+        newGap = responsive.tablet.gap || gap;
+      } else if (responsive.desktop && width > 768) {
+        newSlidesToShow = responsive.desktop.slidesToShow || slidesToShow;
+        newGap = responsive.desktop.gap || gap;
+      }
+
+      setCurrentSlidesToShow(newSlidesToShow);
+      setCurrentGap(newGap);
+    };
+
+    // Set initial values only if responsive config exists
+    if (responsive && Object.keys(responsive).length > 0) {
+      handleResize();
+    }
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [slidesToShow, gap, responsive]);
 
   // Auto-play functionality
   useEffect(() => {
-    if (autoPlay && totalSlides > slidesToShow) {
+    if (autoPlay && totalSlides > currentSlidesToShow) {
       // Clear any existing interval
       if (autoPlayRef.current) {
         clearInterval(autoPlayRef.current);
@@ -37,7 +76,7 @@ export default function Carousel({
         }
       };
     }
-  }, [autoPlay, autoPlayInterval, currentIndex, totalSlides, slidesToShow]);
+  }, [autoPlay, autoPlayInterval, currentIndex, totalSlides, currentSlidesToShow]);
 
   const goToSlide = (index) => {
     if (isAnimating || !carouselRef.current) return;
@@ -50,7 +89,7 @@ export default function Carousel({
       // Reset auto-play timer
       if (autoPlayRef.current) {
         clearInterval(autoPlayRef.current);
-        if (autoPlay && totalSlides > slidesToShow) {
+        if (autoPlay && totalSlides > currentSlidesToShow) {
           autoPlayRef.current = setInterval(() => {
             goToNext();
           }, autoPlayInterval);
@@ -82,7 +121,7 @@ export default function Carousel({
   };
 
   const startAutoPlay = () => {
-    if (autoPlay && totalSlides > slidesToShow) {
+    if (autoPlay && totalSlides > currentSlidesToShow) {
       autoPlayRef.current = setInterval(() => {
         goToNext();
       }, autoPlayInterval);
@@ -109,7 +148,7 @@ export default function Carousel({
         <div 
           className="carousel-track"
           style={{
-            transform: `translateX(-${currentIndex * (100 / slidesToShow)}%)`,
+            transform: `translateX(-${currentIndex * (100 / currentSlidesToShow)}%)`,
             transition: isAnimating ? 'transform 0.3s ease-in-out' : 'none'
           }}
         >
@@ -118,8 +157,8 @@ export default function Carousel({
               key={index} 
               className="carousel-slide"
               style={{
-                width: `calc(${100 / slidesToShow}% - ${(gap * (slidesToShow - 1)) / slidesToShow}px)`,
-                marginRight: index < totalSlides - 1 ? `${gap}px` : '0'
+                width: `calc(${100 / currentSlidesToShow}% - ${(currentGap * (currentSlidesToShow - 1)) / currentSlidesToShow}px)`,
+                marginRight: index < totalSlides - 1 ? `${currentGap}px` : '0'
               }}
             >
               {child}
@@ -128,7 +167,7 @@ export default function Carousel({
         </div>
       </div>
 
-      {showArrows && totalSlides > slidesToShow && (
+      {showArrows && totalSlides > currentSlidesToShow && (
         <>
           <button 
             className="carousel-arrow carousel-arrow-prev"
@@ -147,7 +186,7 @@ export default function Carousel({
         </>
       )}
 
-      {showDots && totalSlides > slidesToShow && (
+      {showDots && totalSlides > currentSlidesToShow && (
         <div className="carousel-dots">
           {Array.from({ length: maxIndex + 1 }, (_, index) => (
             <button

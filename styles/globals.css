@@ -95,7 +95,7 @@ a {
 }
 
 /* Navigation */
-nav {
+.nav-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -114,6 +114,7 @@ nav {
 .nav-left {
   display: flex;
   align-items: center;
+  z-index: 1001;
 }
 
 .nav-title {
@@ -123,13 +124,14 @@ nav {
   text-decoration: none;
 }
 
-.nav-right {
+/* Desktop Navigation */
+.desktop-nav {
   display: flex;
   align-items: center;
   gap: clamp(15px, 3vw, 25px);
 }
 
-.nav-right a {
+.desktop-nav a {
   font-weight: 600;
   cursor: pointer;
   transition: color 0.2s ease;
@@ -138,8 +140,131 @@ nav {
   font-size: clamp(0.85rem, 2vw, 1rem);
 }
 
-.nav-right a:hover, .nav-right a.active {
+.desktop-nav a:hover, .desktop-nav a.active {
   color: #007bff;
+}
+
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 3px;
+  background: #333;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger-line.active:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-line.active:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-line.active:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Mobile Navigation Menu */
+.mobile-nav {
+  position: fixed;
+  top: 60px;
+  right: -100%;
+  width: 100%;
+  max-width: 300px;
+  height: calc(100vh - 60px);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(10px);
+  transition: right 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.mobile-nav.open {
+  right: 0;
+}
+
+.mobile-nav-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mobile-nav-link {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+  text-decoration: none;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+  transition: color 0.2s ease;
+}
+
+.mobile-nav-link:hover, .mobile-nav-link.active {
+  color: #007bff;
+}
+
+.mobile-nav-link:last-child {
+  border-bottom: none;
+}
+
+/* Mobile Menu Overlay */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+  
+  .mobile-menu-toggle {
+    display: flex;
+  }
+  
+  .nav-container {
+    padding: 0 4%;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0 3%;
+  }
+  
+  .mobile-nav {
+    max-width: 100%;
+  }
+  
+  .mobile-nav-content {
+    padding: 15px;
+  }
+  
+  .mobile-nav-link {
+    font-size: 1rem;
+    padding: 12px 0;
+  }
 }
 
 /* Hero Section */
@@ -442,14 +567,11 @@ section h2 {
 
 /* Donate CTA */
 .donate-cta {
-  background: linear-gradient(rgba(0, 123, 255, 0.9), rgba(0, 123, 255, 0.9)), url('/assets/hero.png');
-  background-size: cover;
-  background-position: center;
-  color: #ffffff;
+  color: #333;
 }
 
 .donate-cta h2, .donate-cta .section-intro {
-  color: #ffffff;
+  color: #333;
 }
 
 .cta-buttons {
@@ -1280,6 +1402,19 @@ footer {
   overflow: hidden;
 }
 
+/* Desktop styles - show full text and arrow */
+.view-on-instagram .button-text-full {
+  display: inline;
+}
+
+.view-on-instagram .button-text-short {
+  display: none;
+}
+
+.view-on-instagram .arrow {
+  display: inline;
+}
+
 .view-on-instagram::before {
   content: '';
   position: absolute;
@@ -1330,16 +1465,29 @@ footer {
   }
   
   .view-on-instagram {
-    min-width: 140px;
-    height: 40px;
-    padding: 10px 20px;
-    font-size: 13px;
+    min-width: 120px;
+    height: 36px;
+    padding: 8px 16px;
+    font-size: 12px;
+    gap: 6px;
+  }
+  
+  .view-on-instagram .button-text-full {
+    display: none;
+  }
+  
+  .view-on-instagram .button-text-short {
+    display: inline;
+  }
+  
+  .view-on-instagram .arrow {
+    display: none;
   }
   
   .post-cta,
   .placeholder-cta {
-    padding: 14px;
-    min-height: 56px;
+    padding: 12px;
+    min-height: 54px;
   }
   
   .post-content {
@@ -1414,6 +1562,33 @@ footer {
     width: 32px;
     height: 32px;
     font-size: 14px;
+  }
+  
+  /* Extra small mobile adjustments for post-cta */
+  .view-on-instagram {
+    min-width: 80px;
+    height: 32px;
+    padding: 6px 12px;
+    font-size: 11px;
+    gap: 4px;
+  }
+  
+  .view-on-instagram .button-text-full {
+    display: none;
+  }
+  
+  .view-on-instagram .button-text-short {
+    display: inline;
+  }
+  
+  .view-on-instagram .arrow {
+    display: none;
+  }
+  
+  .post-cta,
+  .placeholder-cta {
+    padding: 12px;
+    min-height: 52px;
   }
 }
 

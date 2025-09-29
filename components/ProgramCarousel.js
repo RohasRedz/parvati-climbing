@@ -30,6 +30,11 @@ export default function ProgramCarousel({ className = '' }) {
         autoPlay={true}
         autoPlayInterval={4500}
         className="programs-carousel-inner"
+        responsive={{
+          mobile: { slidesToShow: 2, gap: 16 },
+          tablet: { slidesToShow: 2, gap: 20 },
+          desktop: { slidesToShow: 3, gap: 24 }
+        }}
       >
         {programs.map((program) => (
           <div key={program.id} className="program-card">

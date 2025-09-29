@@ -98,7 +98,8 @@ export default function InstagramPostSafe({ postUrl, caption, className = '' }) 
             rel="noopener noreferrer"
             className="view-on-instagram"
           >
-            <span>View on Instagram</span>
+            <span className="button-text-full">View on Instagram</span>
+            <span className="button-text-short">View</span>
             <span className="arrow">→</span>
           </a>
         </div>

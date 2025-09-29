@@ -12,6 +12,11 @@ export default function ProjectCarousel({ limit = null, className = '' }) {
         autoPlay={true}
         autoPlayInterval={4000}
         className="projects-carousel"
+        responsive={{
+          mobile: { slidesToShow: 2, gap: 16 },
+          tablet: { slidesToShow: 2, gap: 20 },
+          desktop: { slidesToShow: 3, gap: 24 }
+        }}
       >
         {displayedProjects.map((project) => (
           <div key={project.id} className="project-card">

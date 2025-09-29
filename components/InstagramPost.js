@@ -134,7 +134,9 @@ export default function InstagramPost({ postUrl, className = '' }) {
               rel="noopener noreferrer"
               className="view-on-instagram"
             >
-              View on Instagram →
+              <span className="button-text-full">View on Instagram</span>
+              <span className="button-text-short">View</span>
+              <span className="arrow">→</span>
             </a>
           </div>
         </div>

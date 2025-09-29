@@ -88,7 +88,6 @@ jspm_packages/
 
 # Gatsby files
 .cache/
-public
 
 # Vuepress build output
 .vuepress/dist
@@ -174,18 +173,6 @@ storybook-static
 
 # Firebase
 .firebase/
-
-# PWA files
-**/public/sw.js
-**/public/workbox-*.js
-**/public/worker-*.js
-**/public/sw.js.map
-**/public/workbox-*.js.map
-**/public/worker-*.js.map
-
-# Animation and media assets cache
-/public/assets/cache/
-/public/sounds/cache/
 
 # Development database
 *.sqlite

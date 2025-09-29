@@ -42,6 +42,11 @@ export default function InstagramCarousel({ className = '', title = "Follow Our 
             autoPlay={true}
             autoPlayInterval={6000}
             className="instagram-carousel-inner"
+            responsive={{
+              mobile: { slidesToShow: 2, gap: 16 },
+              tablet: { slidesToShow: 2, gap: 20 },
+              desktop: { slidesToShow: 3, gap: 24 }
+            }}
           >
             {instagramPosts.map((post) => (
               <InstagramPostSafe 
