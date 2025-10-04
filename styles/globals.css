@@ -46,6 +46,9 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 5%; /* Use percentage for responsive padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Typography and Base Elements */
@@ -303,22 +306,27 @@ a {
   color: #fff;
   z-index: 1;
   padding: 0 5%;
-  max-width: 100%;
+  max-width: 1200px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .hero-content h1 {
   font-size: clamp(2rem, 8vw, 3.5rem);
   line-height: 1.2;
   max-width: 800px;
-  margin: 0 auto 20px auto;
+  width: 100%;
+  margin: 0 0 20px 0;
 }
 
 .hero-content p {
   font-size: clamp(1rem, 3vw, 1.2rem);
   margin-bottom: 30px;
   max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 .hero-content button, .hero-button {
@@ -368,10 +376,12 @@ section h2 {
 }
 
 .section-intro {
-  max-width: 80%;
+  width: 100%;
+  max-width: 800px;
   text-align: center;
-  margin-bottom: 32px;
+  margin: 0 auto 32px auto;
   font-size: clamp(1rem, 2.5vw, 1.1rem);
+  line-height: 1.6;
 }
 
 .section-cta {
@@ -863,15 +873,21 @@ footer {
 .carousel {
   position: relative;
   width: 100%;
+  max-width: 100%;
   overflow: visible;
-  padding: 0 60px; /* Space for arrows */
-  margin: 0 auto;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .carousel-container {
   width: 100%;
+  max-width: 100%;
   overflow: hidden;
   border-radius: 12px;
+  position: relative;
 }
 
 .carousel-track {
@@ -929,11 +945,11 @@ footer {
 }
 
 .carousel-arrow-prev {
-  left: 8px;
+  left: -60px;
 }
 
 .carousel-arrow-next {
-  right: 8px;
+  right: -60px;
 }
 
 .carousel-dots {
@@ -941,6 +957,12 @@ footer {
   justify-content: center;
   gap: 8px;
   margin-top: 20px;
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  z-index: 10;
 }
 
 .carousel-dot {
@@ -1096,16 +1118,19 @@ footer {
 .project-carousel,
 .team-carousel,
 .partners-carousel {
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 60px auto; /* Add bottom margin for dots */
   position: relative;
+  padding: 0 80px; /* Space for external arrows */
+  box-sizing: border-box;
 }
 
 .program-carousel .carousel,
 .project-carousel .carousel,
 .team-carousel .carousel,
 .partners-carousel .carousel {
-  padding: 0 70px; /* Extra space for arrows */
+  padding: 0; /* Remove internal padding */
 }
 
 /* Program Cards in Carousel */
@@ -1149,14 +1174,16 @@ footer {
 }
 
 .instagram-carousel {
+  width: 100%;
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 5%;
+  margin: 0 auto 60px auto; /* Add bottom margin for dots */
+  padding: 0 100px; /* More space for Instagram carousel arrows */
   position: relative;
+  box-sizing: border-box;
 }
 
 .instagram-carousel .carousel {
-  padding: 0 80px; /* More space for Instagram carousel arrows */
+  padding: 0; /* Remove internal padding */
 }
 
 .instagram-carousel .carousel-slide {
@@ -1513,22 +1540,34 @@ footer {
   }
   
   .carousel-arrow-prev {
-    left: 4px;
+    left: -50px;
   }
   
   .carousel-arrow-next {
-    right: 4px;
+    right: -50px;
   }
   
-  .program-carousel .carousel,
-  .project-carousel .carousel,
-  .team-carousel .carousel,
-  .partners-carousel .carousel {
-    padding: 0 50px;
-  }
-  
-  .instagram-carousel .carousel {
+  .program-carousel,
+  .project-carousel,
+  .team-carousel,
+  .partners-carousel {
     padding: 0 60px;
+    margin: 0 auto 50px auto; /* Reduced bottom margin on mobile */
+  }
+  
+  .instagram-carousel {
+    padding: 0 70px;
+    margin: 0 auto 50px auto; /* Reduced bottom margin on mobile */
+  }
+  
+  .carousel-dots {
+    bottom: -40px; /* Bring dots closer on mobile */
+    gap: 6px; /* Smaller gap on mobile */
+  }
+  
+  .carousel-dot {
+    width: 10px;
+    height: 10px;
   }
 }
 
@@ -1546,16 +1585,35 @@ footer {
     padding: 0 3%;
   }
   
-  .carousel {
-    padding: 0 40px; /* Even more reduced on very small screens */
+  .carousel-arrow-prev {
+    left: -40px;
   }
   
-  .program-carousel .carousel,
-  .project-carousel .carousel,
-  .team-carousel .carousel,
-  .partners-carousel .carousel,
-  .instagram-carousel .carousel {
-    padding: 0 40px;
+  .carousel-arrow-next {
+    right: -40px;
+  }
+  
+  .program-carousel,
+  .project-carousel,
+  .team-carousel,
+  .partners-carousel {
+    padding: 0 50px;
+    margin: 0 auto 40px auto; /* Even smaller bottom margin on very small screens */
+  }
+  
+  .instagram-carousel {
+    padding: 0 60px;
+    margin: 0 auto 40px auto; /* Even smaller bottom margin on very small screens */
+  }
+  
+  .carousel-dots {
+    bottom: -35px; /* Bring dots even closer on very small screens */
+    gap: 4px; /* Even smaller gap */
+  }
+  
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
   }
   
   .carousel-arrow {

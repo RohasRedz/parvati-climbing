@@ -1,8 +1,8 @@
 import { SiteConfig } from '../../types';
 
 const siteConfig: SiteConfig = {
-  title: 'Parvati Climbing NGO',
-  description: 'Empowering climbers and building bridges between cultures through shared passion and adventure.',
+  title: 'Parvati Climbing Foundation',
+  description: 'Empowering marginalized communities through sustainable outdoor sports, education, healthcare, and environmental conservation in the Parvati Valley.',
   siteUrl: 'https://parvaticlimbing.org',
   logo: '/assets/logo.png', // Placeholder - will need actual logo
   navItems: [
@@ -16,7 +16,7 @@ const siteConfig: SiteConfig = {
   footerInfo: {
     address: 'Parvati Valley, Himachal Pradesh, India',
     email: 'info@parvaticlimbing.org',
-    copyright: `© ${new Date().getFullYear()} Parvati Climbing NGO. All rights reserved.`
+    copyright: `© ${new Date().getFullYear()} Parvati Climbing Foundation. All rights reserved.`
   },
   social: {
     instagram: '@parvaticlimbing',
@@ -26,10 +26,10 @@ const siteConfig: SiteConfig = {
 
 // Mission and vision content for hero and about sections
 export const missionVision = {
-  mission: 'To empower communities through climbing, fostering cultural exchange and environmental stewardship.',
-  vision: 'A world where climbing serves as a bridge between cultures, creating sustainable opportunities for growth and connection.',
-  impact: 'Climb together. Lift communities.',
-  heroTagline: 'Empowering climbers and building bridges between cultures through shared passion and adventure.'
+  mission: 'To empower marginalized communities in the Parvati Valley through sustainable outdoor sports, advancing education, healthcare, poverty relief, and environmental conservation.',
+  vision: 'A thriving Parvati Valley where outdoor sports serve as a catalyst for holistic community development, sustainable tourism, and environmental stewardship.',
+  impact: 'Climb. Empower. Transform.',
+  heroTagline: 'Using climbing and outdoor sports to advance education, healthcare, poverty relief, and environmental sustainability in marginalized communities.'
 };
 
 export default siteConfig;

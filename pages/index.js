@@ -24,9 +24,9 @@ export default function Home() {
         {/* Program Highlights Section */}
         <section className="programs" id="programs">
           <div className="container">
-            <h2>Our Programs</h2>
+            <h2>Our Impact Areas</h2>
             <p className="section-intro">
-              We use climbing as a tool for community development, leadership training, and cultural exchange.
+              We use outdoor sports as a catalyst for holistic community development, focusing on education, healthcare, poverty relief, and environmental sustainability.
             </p>
             
             <ProgramCarousel />
@@ -38,7 +38,7 @@ export default function Home() {
           <div className="container">
             <h2>Our Projects</h2>
             <p className="section-intro">
-              Discover how we're using climbing to create positive change around the world.
+              From educational workshops to healthcare initiatives, discover how we're creating positive change in the Parvati Valley through sustainable outdoor sports.
             </p>
             
             <ProjectCarousel limit={3} />
@@ -56,7 +56,7 @@ export default function Home() {
           <div className="container">
             <h2>Our Partners</h2>
             <p className="section-intro">
-              We collaborate with organizations around the world to maximize our impact.
+              We collaborate with local and international organizations to maximize our impact in education, healthcare, environmental conservation, and sustainable tourism.
             </p>
             
             <PartnersCarousel />
@@ -74,7 +74,7 @@ export default function Home() {
           <div className="container">
             <h2>Support Our Mission</h2>
             <p className="section-intro">
-              Your contribution helps us build accessible climbing infrastructure, provide training and gear, and empower communities around the world.
+              Your contribution helps us advance education, improve healthcare access, provide poverty relief, promote environmental sustainability, and develop sustainable tourism in marginalized communities.
             </p>
             
             <div className="cta-buttons">

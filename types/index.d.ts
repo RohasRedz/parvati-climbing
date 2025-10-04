@@ -54,3 +54,13 @@ export interface Partner {
   url: string;
   blurb: string;
 }
+
+// Programs/Impact Areas
+export interface Program {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  objective: 'education' | 'sport' | 'poverty-relief' | 'healthcare' | 'environment';
+  category: string;
+}

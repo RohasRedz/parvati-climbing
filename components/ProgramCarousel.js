@@ -1,27 +1,7 @@
 import Carousel from './Carousel';
+import programs from '../lib/mock/programs';
 
 export default function ProgramCarousel({ className = '' }) {
-  const programs = [
-    {
-      id: 'program-1',
-      title: 'Leadership Fund',
-      description: 'Support initiatives that train local leaders to build sustainable climbing communities.',
-      image: '/assets/story1.png'
-    },
-    {
-      id: 'program-2',
-      title: 'Training & Courses',
-      description: 'Hands‑on courses that teach climbing skills, safety and environmental stewardship.',
-      image: '/assets/story2.png'
-    },
-    {
-      id: 'program-3',
-      title: 'Gear Access',
-      description: 'Providing gear libraries and equitable access to climbing equipment for all.',
-      image: '/assets/story3.png'
-    }
-  ];
-
   return (
     <div className={`program-carousel ${className}`}>
       <Carousel
