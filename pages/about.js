@@ -2,13 +2,13 @@ import Head from 'next/head';
 import Nav from '../components/Nav';
 import TeamCarousel from '../components/TeamCarousel';
 import InstagramCarousel from '../components/InstagramCarousel';
-import siteConfig, { missionVision } from '../lib/mock/site';
+import config from '../lib/config/env';
 
 export default function About() {
   return (
     <div className="page-wrapper">
       <Head>
-        <title>{`About Us | ${siteConfig.title}`}</title>
+        <title>{`About Us | ${config.site.name}`}</title>
         <meta name="description" content="Learn about the history and team behind Parvati Climbing NGO" />
       </Head>
       
@@ -18,7 +18,7 @@ export default function About() {
         <section className="about-hero">
           <div className="container">
             <h1>About Parvati Climbing</h1>
-            <p className="lead">{missionVision.mission}</p>
+            <p className="lead">{config.content.mission}</p>
           </div>
         </section>
         
@@ -55,13 +55,13 @@ export default function About() {
         <div className="container">
           <div className="footer-content">
             <div className="footer-info">
-              <p>{siteConfig.footerInfo.address}</p>
-              <p>Email: <a href={`mailto:${siteConfig.footerInfo.email}`}>{siteConfig.footerInfo.email}</a></p>
-              <p>Follow us: <a href={siteConfig.social.instagramUrl} target="_blank" rel="noopener noreferrer">{siteConfig.social.instagram}</a></p>
+              <p>{config.contact.address}</p>
+              <p>Email: <a href={`mailto:${config.contact.email}`}>{config.contact.email}</a></p>
+              <p>Follow us: <a href={config.social.instagram.url} target="_blank" rel="noopener noreferrer">{config.social.instagram.handle}</a></p>
             </div>
           </div>
           <div className="footer-bottom">
-            <p className="copyright">{siteConfig.footerInfo.copyright}</p>
+            <p className="copyright">© {new Date().getFullYear()} {config.site.name}. All rights reserved.</p>
           </div>
         </div>
       </footer>

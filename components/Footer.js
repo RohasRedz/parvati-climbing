@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import siteConfig from '../lib/mock/site';
+import config from '../lib/config/env';
 
 export default function Footer() {
   return (
@@ -7,14 +7,14 @@ export default function Footer() {
       <div className="container">
         <div className="footer-content">
           <div className="footer-info">
-            <p>{siteConfig.footerInfo.address}</p>
-            <p>Email: <a href={`mailto:${siteConfig.footerInfo.email}`}>{siteConfig.footerInfo.email}</a></p>
-            <p>Follow us: <a href={siteConfig.social.instagramUrl} target="_blank" rel="noopener noreferrer">{siteConfig.social.instagram}</a></p>
+            <p>{config.contact.address}</p>
+            <p>Email: <a href={`mailto:${config.contact.email}`}>{config.contact.email}</a></p>
+            <p>Follow us: <a href={config.social.instagram.url} target="_blank" rel="noopener noreferrer">{config.social.instagram.handle}</a></p>
           </div>
           
           <div className="footer-nav">
             <ul>
-              {siteConfig.navItems.map((item) => (
+              {config.navigation.map((item) => (
                 <li key={item.path}>
                   <Link href={item.path}>
                     {item.label}
@@ -26,7 +26,7 @@ export default function Footer() {
         </div>
         
         <div className="footer-bottom">
-          <p className="copyright">{siteConfig.footerInfo.copyright}</p>
+          <p className="copyright">© {new Date().getFullYear()} {config.site.name}. All rights reserved.</p>
         </div>
       </div>
     </footer>

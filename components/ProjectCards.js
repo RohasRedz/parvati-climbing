@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import projects from '../lib/mock/projects';
+import config from '../lib/config/env';
 
 export default function ProjectCards({ limit = 3 }) {
   // refs to each project card so we can animate them
@@ -8,7 +8,7 @@ export default function ProjectCards({ limit = 3 }) {
   
   // Set up the refs array
   useEffect(() => {
-    cardRefs.current = cardRefs.current.slice(0, Math.min(limit, projects.length));
+    cardRefs.current = cardRefs.current.slice(0, Math.min(limit, config.projects.length));
   }, [limit]);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function ProjectCards({ limit = 3 }) {
   }, []);
 
   // Display only the specified number of projects
-  const displayedProjects = projects.slice(0, limit);
+  const displayedProjects = config.projects.slice(0, limit);
 
   return (
     <div className="project-cards">

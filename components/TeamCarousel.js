@@ -1,5 +1,5 @@
 import Carousel from './Carousel';
-import teamMembers from '../lib/mock/team';
+import config from '../lib/config/env';
 
 export default function TeamCarousel({ className = '' }) {
   return (
@@ -11,7 +11,7 @@ export default function TeamCarousel({ className = '' }) {
         autoPlayInterval={5000}
         className="team-carousel-inner"
       >
-        {teamMembers.map((member) => (
+        {config.team.map((member) => (
           <div key={member.id} className="team-member">
             <div className="member-image">
               {/* Placeholder image until actual headshots are available */}

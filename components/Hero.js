@@ -1,11 +1,14 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
-import { missionVision } from '../lib/mock/site';
+import config from '../lib/config/env';
+import { useBackgroundParallax } from '../hooks/useParallax';
 
 export default function Hero() {
   const ropeRef = useRef(null);
   const carabinerRef = useRef(null);
+  const heroBackgroundRef = useBackgroundParallax(0.4);
+  const heroContentRef = useBackgroundParallax(0.2);
 
   useEffect(() => {
     // Check for reduced motion preference
@@ -40,7 +43,9 @@ export default function Hero() {
 
   return (
     <section className="hero" id="hero">
-      <img className="hero-bg" src="/assets/hero.png" alt="Mountain valley with climbing routes" />
+      <div ref={heroBackgroundRef} className="hero-bg-parallax">
+        <img className="hero-bg" src="/assets/hero.png" alt="Mountain valley with climbing routes" />
+      </div>
       <div className="overlay" />
       <div className="svg-container">
         <svg width="100%" height="100%" viewBox="0 0 1440 800">
@@ -54,9 +59,9 @@ export default function Hero() {
           <circle ref={carabinerRef} cx="1440" cy="400" r="14" fill="#f4a460" />
         </svg>
       </div>
-      <div className="hero-content">
-        <h1>{missionVision.impact}</h1>
-        <p>{missionVision.heroTagline}</p>
+      <div ref={heroContentRef} className="hero-content">
+        <h1>{config.content.impact}</h1>
+        <p>{config.content.heroTagline}</p>
         <Link href="/donate" className="hero-button">
           Join / Donate
         </Link>

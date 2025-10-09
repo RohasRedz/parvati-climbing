@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import siteConfig from '../lib/mock/site';
+import config from '../lib/config/env';
 
 export default function Nav() {
   const router = useRouter();
@@ -49,13 +49,13 @@ export default function Nav() {
     <nav className="nav-container">
       <div className="nav-left">
         <Link href="/" className="nav-title">
-          {siteConfig.title}
+          {config.site.name}
         </Link>
       </div>
       
       {/* Desktop Navigation */}
       <div className="nav-right desktop-nav">
-        {siteConfig.navItems.map((item) => (
+        {config.navigation.map((item) => (
           <Link 
             href={item.path} 
             key={item.path}
@@ -81,7 +81,7 @@ export default function Nav() {
       {/* Mobile Navigation Menu */}
       <div className={`mobile-nav ${isMobileMenuOpen ? 'open' : ''}`}>
         <div className="mobile-nav-content">
-          {siteConfig.navItems.map((item) => (
+          {config.navigation.map((item) => (
             <Link 
               href={item.path} 
               key={item.path}

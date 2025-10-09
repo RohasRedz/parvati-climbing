@@ -1,11 +1,11 @@
 import Carousel from './Carousel';
-import InstagramPostSafe from './InstagramPostSafe';
-import instagramPosts from '../lib/mock/instagram.js';
-import siteConfig from '../lib/mock/site';
+import InstagramEmbedPost from './InstagramEmbedPost';
+// Instagram posts now come from environment configuration
+import config from '../lib/config/env';
 
 export default function InstagramCarousel({ className = '', title = "Follow Our Journey" }) {
   // Check if we have posts to display
-  if (!instagramPosts || instagramPosts.length === 0) {
+  if (!config.instagram.posts || config.instagram.posts.length === 0) {
     return (
       <section className={`instagram-section ${className}`}>
         <div className="container">
@@ -15,12 +15,12 @@ export default function InstagramCarousel({ className = '', title = "Follow Our 
           </p>
           <div className="section-cta">
             <a 
-              href={siteConfig.social.instagramUrl} 
+              href={config.social.instagram.url} 
               target="_blank" 
               rel="noopener noreferrer"
               className="btn-primary"
             >
-              Follow {siteConfig.social.instagram}
+              Follow {config.social.instagram.handle}
             </a>
           </div>
         </div>
@@ -37,22 +37,20 @@ export default function InstagramCarousel({ className = '', title = "Follow Our 
         </p>
         <div className="instagram-carousel">
           <Carousel
-            slidesToShow={3}
-            gap={24}
-            autoPlay={true}
-            autoPlayInterval={6000}
+            slidesToShow={2}
+            gap={20}
+            autoPlay={false}
             className="instagram-carousel-inner"
             responsive={{
-              mobile: { slidesToShow: 2, gap: 16 },
+              mobile: { slidesToShow: 1, gap: 16 },
               tablet: { slidesToShow: 2, gap: 20 },
-              desktop: { slidesToShow: 3, gap: 24 }
+              desktop: { slidesToShow: 2, gap: 24 }
             }}
           >
-            {instagramPosts.map((post) => (
-              <InstagramPostSafe 
+            {config.instagram.posts.map((post) => (
+              <InstagramEmbedPost 
                 key={post.id} 
                 postUrl={post.url}
-                caption={post.caption}
                 className="carousel-instagram-post"
               />
             ))}
@@ -60,12 +58,12 @@ export default function InstagramCarousel({ className = '', title = "Follow Our 
         </div>
         <div className="section-cta">
           <a 
-            href={siteConfig.social.instagramUrl} 
+            href={config.social.instagram.url} 
             target="_blank" 
             rel="noopener noreferrer"
             className="btn-primary"
           >
-            Follow {siteConfig.social.instagram}
+            Follow {config.social.instagram.handle}
           </a>
         </div>
       </div>

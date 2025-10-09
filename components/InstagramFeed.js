@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import InstagramPost from './InstagramPost';
-import instagramPosts from '../lib/mock/instagram.js';
+import config from '../lib/config/env';
 
 /**
  * InstagramFeed component - handles displaying Instagram posts
@@ -27,7 +27,7 @@ export default function InstagramFeed({
         // const data = await response.json();
         
         // For now, use mock data
-        const limitedPosts = limit ? instagramPosts.slice(0, limit) : instagramPosts;
+        const limitedPosts = limit ? config.instagram.posts.slice(0, limit) : config.instagram.posts;
         setPosts(limitedPosts);
         setLoading(false);
       } catch (err) {

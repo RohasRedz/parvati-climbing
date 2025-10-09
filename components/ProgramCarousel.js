@@ -1,5 +1,5 @@
 import Carousel from './Carousel';
-import programs from '../lib/mock/programs';
+import config from '../lib/config/env';
 
 export default function ProgramCarousel({ className = '' }) {
   return (
@@ -16,7 +16,7 @@ export default function ProgramCarousel({ className = '' }) {
           desktop: { slidesToShow: 3, gap: 24 }
         }}
       >
-        {programs.map((program) => (
+          {config.programs.map((program) => (
           <div key={program.id} className="program-card">
             <img src={program.image} alt={program.title} />
             <div className="card-body">

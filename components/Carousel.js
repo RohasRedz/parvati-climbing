@@ -149,7 +149,8 @@ export default function Carousel({
           className="carousel-track"
           style={{
             transform: `translateX(-${currentIndex * (100 / currentSlidesToShow)}%)`,
-            transition: isAnimating ? 'transform 0.3s ease-in-out' : 'none'
+            transition: isAnimating ? 'transform 0.3s ease-in-out' : 'none',
+            width: `calc(100% + ${(totalSlides - 1) * currentGap}px)`
           }}
         >
           {children.map((child, index) => (
@@ -157,8 +158,9 @@ export default function Carousel({
               key={index} 
               className="carousel-slide"
               style={{
-                width: `calc(${100 / currentSlidesToShow}% - ${(currentGap * (currentSlidesToShow - 1)) / currentSlidesToShow}px)`,
-                marginRight: index < totalSlides - 1 ? `${currentGap}px` : '0'
+                width: `calc((100% - ${(currentSlidesToShow - 1) * currentGap}px) / ${currentSlidesToShow})`,
+                marginRight: index < totalSlides - 1 ? `${currentGap}px` : '0',
+                flexShrink: 0
               }}
             >
               {child}

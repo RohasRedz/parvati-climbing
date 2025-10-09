@@ -1,5 +1,5 @@
 import Carousel from './Carousel';
-import partners from '../lib/mock/partners';
+import config from '../lib/config/env';
 
 export default function PartnersCarousel({ className = '' }) {
   return (
@@ -17,7 +17,7 @@ export default function PartnersCarousel({ className = '' }) {
           desktop: { slidesToShow: 4, gap: 24 }
         }}
       >
-        {partners.map((partner) => (
+        {config.partners.map((partner) => (
           <div key={partner.id} className="partner-card">
             <a href={partner.url} target="_blank" rel="noopener noreferrer" className="partner-logo">
               {/* Placeholder logo until actual partner logos are available */}

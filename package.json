@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "env:create": "node scripts/setup-env.js create",
+    "env:validate": "node scripts/setup-env.js validate",
+    "env:help": "node scripts/setup-env.js"
   },
   "dependencies": {
     "next": "latest",

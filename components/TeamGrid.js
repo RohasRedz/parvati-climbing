@@ -1,9 +1,9 @@
-import teamMembers from '../lib/mock/team';
+import config from '../lib/config/env';
 
 export default function TeamGrid() {
   return (
     <div className="team-grid">
-      {teamMembers.map((member) => (
+      {config.team.map((member) => (
         <div key={member.id} className="team-member">
           <div className="member-image">
             {/* Placeholder image until actual headshots are available */}

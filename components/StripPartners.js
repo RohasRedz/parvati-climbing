@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import anime from 'animejs';
-import partners from '../lib/mock/partners';
+import config from '../lib/config/env';
 
 export default function StripPartners({ limit = 4 }) {
   const stripRef = useRef(null);
@@ -28,7 +28,7 @@ export default function StripPartners({ limit = 4 }) {
   }, []);
 
   // Display only the specified number of partners
-  const displayedPartners = partners.slice(0, limit);
+  const displayedPartners = config.partners.slice(0, limit);
 
   return (
     <div className="partners-strip" ref={stripRef}>

@@ -7,14 +7,14 @@ import ProjectCarousel from '../components/ProjectCarousel';
 import PartnersCarousel from '../components/PartnersCarousel';
 import InstagramCarousel from '../components/InstagramCarousel';
 import Footer from '../components/Footer';
-import siteConfig, { missionVision } from '../lib/mock/site';
+import config from '../lib/config/env';
 
 export default function Home() {
   return (
     <div className="page-wrapper">
       <Head>
-        <title>{`${siteConfig.title} | Climbing for Community Impact`}</title>
-        <meta name="description" content={siteConfig.description} />
+        <title>{`${config.site.name} | Climbing for Community Impact`}</title>
+        <meta name="description" content={config.site.description} />
       </Head>
       
       <Nav />

@@ -1,21 +1,22 @@
 import Carousel from './Carousel';
-import projects from '../lib/mock/projects';
+import config from '../lib/config/env';
 
 export default function ProjectCarousel({ limit = null, className = '' }) {
-  const displayedProjects = limit ? projects.slice(0, limit) : projects;
+  const displayedProjects = limit ? config.projects.slice(0, limit) : config.projects;
 
   return (
     <div className={`project-carousel ${className}`}>
       <Carousel
-        slidesToShow={3}
+        slidesToShow={Math.min(3, displayedProjects.length)}
         gap={24}
-        autoPlay={true}
+        autoPlay={displayedProjects.length > 3}
         autoPlayInterval={4000}
         className="projects-carousel"
+        showArrows={displayedProjects.length > 3}
         responsive={{
-          mobile: { slidesToShow: 2, gap: 16 },
-          tablet: { slidesToShow: 2, gap: 20 },
-          desktop: { slidesToShow: 3, gap: 24 }
+          mobile: { slidesToShow: Math.min(2, displayedProjects.length), gap: 16 },
+          tablet: { slidesToShow: Math.min(2, displayedProjects.length), gap: 20 },
+          desktop: { slidesToShow: Math.min(3, displayedProjects.length), gap: 24 }
         }}
       >
         {displayedProjects.map((project) => (
