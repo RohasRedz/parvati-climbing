@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import Nav from '../components/Nav';
-import Hero from '../components/Hero';
+import MultiLayerParallaxHero from '../components/MultiLayerParallaxHero';
 import ProgramCarousel from '../components/ProgramCarousel';
 import ProjectCarousel from '../components/ProjectCarousel';
 import PartnersCarousel from '../components/PartnersCarousel';
@@ -18,7 +18,7 @@ export default function Home() {
       </Head>
       
       <Nav />
-      <Hero />
+      <MultiLayerParallaxHero />
       
       <main className="main-content">
         {/* Program Highlights Section */}
@@ -78,7 +78,7 @@ export default function Home() {
             </p>
             
             <div className="cta-buttons">
-              <Link href="/donate" className="btn-primary btn-large">
+              <Link href="/donate" className="donate-btn-primary btn-primary btn-large">
                 Donate Now
               </Link>
               <Link href="/contact" className="btn-secondary">
