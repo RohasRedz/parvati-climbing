@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Nav from '../components/Nav';
 import MultiLayerParallaxHero from '../components/MultiLayerParallaxHero';
-import ProgramCarousel from '../components/ProgramCarousel';
+import ObjectivesAccordion from '../components/ObjectivesAccordion';
 import ProjectCarousel from '../components/ProjectCarousel';
 import PartnersCarousel from '../components/PartnersCarousel';
 import InstagramCarousel from '../components/InstagramCarousel';
@@ -21,15 +21,15 @@ export default function Home() {
       <MultiLayerParallaxHero />
       
       <main className="main-content">
-        {/* Program Highlights Section */}
-        <section className="programs" id="programs">
+        {/* Objectives Section (replaces Programs) */}
+        <section className="objectives" id="objectives">
           <div className="container">
-            <h2>Our Impact Areas</h2>
+            <h2>Our Objectives</h2>
             <p className="section-intro">
-              We use outdoor sports as a catalyst for holistic community development, focusing on education, healthcare, poverty relief, and environmental sustainability.
+              We focus on development: strengthening education, healthcare, livelihoods and environmental stewardship — with outdoor skills as a supportive catalyst.
             </p>
-            
-            <ProgramCarousel />
+
+            <ObjectivesAccordion />
           </div>
         </section>
         
